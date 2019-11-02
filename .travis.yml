@@ -1,0 +1,21 @@
+sudo: required
+
+service:
+  - docker
+
+before_install:
+  - docker build -t docker-test -f ./client/Dockerfile.dev ./client
+
+script:
+  - docker run -e CI=true docker-test npm test
+
+after_success:
+  - docker build -t szaszolak/multi-client ./client
+  - docker build -t szaszolak/multi-nginx  ./nginx
+  - docker build -t szaszolak/multi-server ./server
+  - docker build -t szaszolak/multi-worker ./worker
+  - echo "$DOCKER_PASS" | docker login -u "$DOCKER_ID" --password-stdin
+  - docker push szaszolak/multi-client  
+  - docker push szaszolak/multi-nginx 
+  - docker push szaszolak/multi-server
+  - docker push szaszolak/multi-worker
