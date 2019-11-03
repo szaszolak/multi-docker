@@ -1,0 +1,34 @@
+{
+  "AWSEBDockerrunVesion": 2,
+  "containerDefinitions": [
+    {
+      "name": "nginx-router",
+      "image": "szaszolak/multi-nginx",
+      "esential": true,
+      "portMappings": {
+        "containerPort": 80,
+        "hostPort": 80
+      },
+      "links": ["client", "server"]
+    },
+    {
+      "name": "client",
+      "image": "szaszolak/complex-client",
+      "hostname": "client",
+      "esential": false  
+    },
+    {
+      "name": "server",
+      "image": "szaszolak/multi-server",
+      "hostname": "api",
+      "esential": false  
+
+    },
+    {
+      "name": "worker",
+      "image": "szaszolak/multi-worker",
+      "hostname": "worker",
+      "esential": false  
+    }
+  ]
+}
