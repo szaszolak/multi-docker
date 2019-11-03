@@ -14,7 +14,7 @@
     },
     {
       "name": "client",
-      "image": "szaszolak/complex-client",
+      "image": "szaszolak/multi-client",
       "hostname": "client",
       "esential": false,
       "memory": 128
