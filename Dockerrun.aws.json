@@ -5,30 +5,33 @@
       "name": "nginx-router",
       "image": "szaszolak/multi-nginx",
       "esential": true,
-      "portMappings": {
+      "portMappings": [{
         "containerPort": 80,
         "hostPort": 80
-      },
-      "links": ["client", "server"]
+      }],
+      "links": ["client", "server"],
+      "memory": 128
     },
     {
       "name": "client",
       "image": "szaszolak/complex-client",
       "hostname": "client",
-      "esential": false  
+      "esential": false,
+      "memory": 128
     },
     {
       "name": "server",
       "image": "szaszolak/multi-server",
       "hostname": "api",
-      "esential": false  
-
+      "esential": false,
+      "memory": 128
     },
     {
       "name": "worker",
       "image": "szaszolak/multi-worker",
       "hostname": "worker",
-      "esential": false  
+      "esential": false,
+      "memory": 128
     }
   ]
 }
