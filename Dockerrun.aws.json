@@ -2,35 +2,38 @@
   "AWSEBDockerrunVersion": 2,
   "containerDefinitions": [
     {
-      "name": "nginx-router",
-      "image": "szaszolak/multi-nginx",
-      "esential": true,
-      "portMappings": [{
-        "containerPort": 80,
-        "hostPort": 80
-      }],
-      "links": ["client", "server"],
-      "memory": 512
-    },
-    {
       "name": "client",
       "image": "szaszolak/multi-client",
       "hostname": "client",
-      "esential": false,
+      "essential": false,
       "memory": 128
     },
     {
       "name": "server",
       "image": "szaszolak/multi-server",
       "hostname": "api",
-      "esential": false,
+      "essential": false,
       "memory": 128
     },
     {
       "name": "worker",
       "image": "szaszolak/multi-worker",
       "hostname": "worker",
-      "esential": false,
+      "essential": false,
+      "memory": 128
+    },
+    {
+      "name": "nginx",
+      "image": "szaszolak/multi-nginx",
+      "hostname": "nginx",
+      "essential": true,
+      "portMappings": [
+        {
+          "hostPort": 80,
+          "containerPort": 80
+        }
+      ],
+      "links": ["client", "server"],
       "memory": 128
     }
   ]
